@@ -19,6 +19,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"supabase": "^1.112.0"
+		"@supabase/supabase-js": "^2.38.4",
+		"supabase": "^1.112.0",
+		"sveltekit-superforms": "^1.10.2",
+		"zod": "^3.22.4"
 	}
 }

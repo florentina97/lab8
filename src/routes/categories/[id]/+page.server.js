@@ -1,15 +1,17 @@
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ fetch, params }) {
-  let products;
+  let category;
 
   try {
     // Call fetch
-    const res_products = await fetch("/api/products");
-
+    const id = parseInt(params.id);
+    const res_category = await fetch(`/api/categories/${id}`);
+    console.log(params);
     // if resonse code 200 (ok)
-    if (res_products.ok) {
+    if (res_category.ok) {
       // get json from resonse
-      products = await res_products.json();
+      category = await res_category.json();
+      console.log(category.data[0]);
     }
   } catch (error) {
     // an error occured - return status code amd mesage
@@ -20,6 +22,6 @@ export async function load({ fetch, params }) {
   }
 
   return {
-    products: products.data,
+    category: category.data[0],
   };
 }

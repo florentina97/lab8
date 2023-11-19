@@ -5,21 +5,20 @@ import {supabase} from "$lib/supabase.js";
 
 export async function GET({ request, cookies }) {
 
-    const categories = await supabase
-    .from('category')
+    const products = await supabase
+    .from('product')
     .select('*')
-    .order('name', {ascending: true});
 
-    if (categories.error) {
+    if (products.error) {
         return json({
-            status: categories.status,
-            error: categories.error
+            status: products.status,
+            error: products.error
         });
     }
-
+    console.log(products)
     return json({
-        data: categories.data,
-        status: categories.status
+        data: products.data,
+        status: products.status
     });
 }
 
@@ -29,7 +28,7 @@ export async function POST({ request, cookies }) {
 
     // Insert data
     const cat = await supabase
-    .from('category')
+    .from('product')
     .insert([data])
     .select()
 

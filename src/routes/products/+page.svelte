@@ -12,22 +12,24 @@ export let data;
     <table class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
-                <th>id</th>
-                <th>title</th>
-                <th>decription</th>
-                <th>price</th>
-                <th>stock</th>
+                <th>Id</th>
+                <th>Category ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Stock</th>
+                <th>Price</th>
             </tr>
         </thead>
         <tbody>
             <!-- Iterate trough the products array, adding a new table row for each product -->
             {#each data.products as product}
             <tr>
-                <td>{product.id}</td>
-                <td>{product.title}</td>
-                <td>{product.description}</td> 
-                <td>{product.price}</td> 
-                <td>{product.stock}</td>                   
+                <td><a href={`/products/${product.id}`}>{product.id}</a></td>
+                <td>{product.category_id}</td>
+                <td>{product.product_name}</td> 
+                <td>{product.product_description}</td> 
+                <td>{product.product_price}</td> 
+                <td>{product.product_stock}</td>                   
             </tr>
             {/each} <!-- end the 'each' loop-->
         </tbody>

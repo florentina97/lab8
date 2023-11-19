@@ -7,28 +7,27 @@ import {supabase} from "$lib/supabase.js";
 export async function GET({ params, request, cookies }) {
 
     let cat = 0;
-    if (params.cat_id && !isNaN(parseInt(params.cat_id))) {
-        cat = parseInt(params.cat_id)
+    if (params.id && !isNaN(parseInt(params.id))) {
+        cat = parseInt(params.id)
     }
+    console.log(cat)       
 
     if (cat > 0) {
-
-        const locations = await supabase
-        .from('locations')
+        const products = await supabase
+        .from('product')
         .select('*')
         .eq('category_id', cat)
-        .order('name', {ascending: true});
 
-        if (locations.error) {
+        if (products.error) {
             return json({
-                status: locations.status,
-                error: locations.error
+                status: products.status,
+                error: products.error
             });
         }
 
         return json({
-            data: locations.data,
-            status: locations.status
+            data: products.data,
+            status: products.status
         });
 
     }

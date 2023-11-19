@@ -3,40 +3,37 @@ import { json } from '@sveltejs/kit';
 // import the client instance (created earlier)
 import {supabase} from "$lib/supabase.js";
 
-// Get all locations
 export async function GET({ request, cookies }) {
 
-    // Query data
-    const locations = await supabase
-    .from('locations')
-    .select('*');
+    const categories = await supabase
+    .from('category')
+    .select('*')
 
-    if (locations.error) {
+    if (categories.error) {
         return json({
-            status: locations.status,
-            error: locations.error
+            status: categories.status,
+            error: categories.error
         });
     }
 
     return json({
-        data: locations.data,
-        status: locations.status
+        data: categories.data,
+        status: categories.status
     });
 }
 
-// Add a new location
 export async function POST({ request, cookies }) {
     // Get data from request body
     let data = await request.json();
 
     // Insert data
-    const loc = await supabase
-    .from('locations')
+    const cat = await supabase
+    .from('category')
     .insert([data])
     .select()
 
 
     return json({
-        data: loc.data
+        data: cat.data
     });
 }
